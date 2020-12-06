@@ -1,0 +1,6 @@
+{"id":81690,"first_name":"siva","middle_name":"subramani","last_name":"vijay","date_of_birth":"25/02/1992"}
+81690
+{"status":"true","msg":"Add  data success"}
+{"Message":"An error has occurred."}
+500
+{"Message":"An error has occurred."}

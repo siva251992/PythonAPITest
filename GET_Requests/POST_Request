@@ -1,0 +1,43 @@
+import requests
+import json
+import jsonpath
+
+# Api Url
+url = "https://reqres.in/api/users"
+
+# Read input jsonFile
+
+file = open('C:\\Users\\esivxxx\\Desktop\\Create_User.json', 'r')
+# reading the content from file(String Format)
+json_input = file.read()
+
+# Typecast to Json format
+requests_json = json.loads(json_input)
+print(requests_json)
+
+# Make post request with Json I/P
+
+response = requests.post(url, requests_json)
+print(response.status_code)
+print(response.content)
+
+# validating response code
+try:
+    assert response.status_code == 201, "User not created"
+    print("User Created")
+
+except AssertionError as msg:
+    print(msg)
+
+# To get Headers
+
+print(response.headers.get('Content-Type'))
+
+# Typecast response to JsonFormat
+
+response_json = json.loads(response.text)
+
+# Pick id using jsonpath
+
+id = jsonpath.jsonpath(response_json, 'id')
+print(id)

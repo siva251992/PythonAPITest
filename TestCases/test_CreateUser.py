@@ -2,6 +2,7 @@ import requests
 import json
 import jsonpath
 import pytest
+import allure
 
 # Api Url
 url = "https://reqres.in/api/users"
@@ -16,6 +17,8 @@ def start_exec():
     file.close()
 
 @pytest.mark.smoke
+@allure.description("create user1- Valid StatusCode Assertion")
+@allure.severity(severity_level="CRITICAL")
 def test_create_new_user1(start_exec):
     # reading the content from file(String Format)
     json_input = file.read()
@@ -36,6 +39,8 @@ def test_create_new_user1(start_exec):
     print(id[0])
 
 @pytest.mark.sanity
+@allure.description("create user2- Invalid StatusCode Assertion")
+@allure.severity(severity_level="Normal")
 def test_create_new_user2(start_exec):
     # reading the content from file(String Format)
     json_input = file.read()
@@ -47,7 +52,7 @@ def test_create_new_user2(start_exec):
     print(response.status_code)
     print(response.content)
     # validating response code
-    assert response.status_code == 201, "User created"
+    assert response.status_code == 204, "User created"
     print(response.headers.get('Content-Type'))
     # Typecast response to JsonFormat
     response_json = json.loads(response.text)
